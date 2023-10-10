@@ -7,7 +7,7 @@ import '../repos/to_do_repo.dart';
 abstract class ToDoEvent {}
 
 class ToDoInitialEvent extends ToDoEvent {
-  ToDoInitialEvent();
+  // ToDoInitialEvent();
 }
 
 class ToDoSubmitEvent extends ToDoEvent{

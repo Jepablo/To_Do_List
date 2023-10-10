@@ -23,7 +23,7 @@ class ToDoRepo{
     return await edit.doc(todoID).update({'title': title , 'desc' : desc});
   }
 
-  static Future<List<ToDoDataModel>> get() async{ //retrieve data from database
+  static Future<List<ToDoDataModel>>  get() async{ //retrieve data from database
     List<ToDoDataModel> todoList = [];
     try{
       final todo = await FirebaseFirestore.instance.collection("ToDo").get();

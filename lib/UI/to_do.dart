@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/UI/profile/profile_page.dart';
 import 'package:todolist/UI/to_do_add_tile_widget.dart';
 import 'package:todolist/UI/to_do_tile_widget.dart';
 import 'package:todolist/bloc/to_do_event.dart';
@@ -16,12 +17,19 @@ class ToDoPage extends StatefulWidget {
 }
 
 class _ToDoPageState extends State<ToDoPage> {
+
+
   @override
   void initState() {
     todoBloc.add(ToDoInitialEvent());
     // TODO: implement initState
     super.initState();
   }
+  static const List<Widget> _pages = <Widget>[
+    const ToDoPage(),
+    const ProfilePage(),
+  ];
+  int _selectedIndex = 0;
   //initialize bloc
   final ToDoBloc todoBloc = ToDoBloc();
   Widget build(BuildContext context) {
@@ -46,6 +54,20 @@ class _ToDoPageState extends State<ToDoPage> {
             // List<ToDoDataModel> data = state.mydata;
             final successState = state as ToDoLoadingSuccessState;
             return Scaffold(
+              bottomNavigationBar: BottomNavigationBar(
+                currentIndex: _selectedIndex,
+                onTap: _onItemTapped,
+                items: const <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home),
+                    label: 'Home',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.person),
+                    label: 'Profile',
+                  ),
+                ],
+              ),
               appBar: AppBar(
                 title: (Text('To Do Page')),
               ),
@@ -71,4 +93,12 @@ class _ToDoPageState extends State<ToDoPage> {
     );
 
   }
+  void _onItemTapped (int index){
+    setState(() {
+      Navigator.push(context,MaterialPageRoute(builder: (context) => _pages.elementAt(index)));
+      // print(_selectedIndex);
+    });
+  }
 }
+
+
